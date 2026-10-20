@@ -28,7 +28,10 @@
                 class="nav-link {{ request()->routeIs('categories.*') ? 'active' : '' }}">
                 Categories
             </a>
-            <a href="#" class="nav-link">Suppliers</a>
+            <a href="{{ route('suppliers.index') }}"
+                class="nav-link {{ request()->routeIs('suppliers.*') ? 'active' : '' }}">
+                Suppliers
+            </a>
             <a href="#" class="nav-link">Stock Report</a>
         </div>
 
