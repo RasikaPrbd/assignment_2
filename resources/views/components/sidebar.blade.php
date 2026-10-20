@@ -8,7 +8,7 @@
 
     <nav class="sidebar-nav">
 
-        <a href="{{ route('dashboard') }}" class="nav-link active">
+        <a href="{{ route('dashboard') }}" class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
             Dashboard
         </a>
 
@@ -24,7 +24,10 @@
             <p class="menu-heading">INVENTORY</p>
 
             <a href="#" class="nav-link">Products</a>
-            <a href="#" class="nav-link">Categories</a>
+            <a href="{{ route('categories.index') }}"
+                class="nav-link {{ request()->routeIs('categories.*') ? 'active' : '' }}">
+                Categories
+            </a>
             <a href="#" class="nav-link">Suppliers</a>
             <a href="#" class="nav-link">Stock Report</a>
         </div>
