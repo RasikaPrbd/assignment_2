@@ -24,7 +24,10 @@
         <div class="nav-group">
             <p class="menu-heading">INVENTORY</p>
 
-            <a href="#" class="nav-link">Products</a>
+            <a href="{{ route('products.index') }}"
+                class="nav-link {{ request()->routeIs('products.*') ? 'active' : '' }}">
+                Products
+            </a>
             <a href="{{ route('categories.index') }}"
                 class="nav-link {{ request()->routeIs('categories.*') ? 'active' : '' }}">
                 Categories
@@ -36,13 +39,19 @@
             <a href="#" class="nav-link">Stock Report</a>
         </div>
 
+
         <div class="nav-group">
             <p class="menu-heading">TRANSACTIONS</p>
 
-            <a href="#" class="nav-link">Purchases</a>
+            <a href="{{ route('purchases.index') }}"
+                class="nav-link {{ request()->routeIs('purchases.*') ? 'active' : '' }}">
+                Purchases
+            </a>
+
             <a href="#" class="nav-link">Invoices</a>
             <a href="#" class="nav-link">Payments</a>
         </div>
+
 
         <div class="nav-group">
             <p class="menu-heading">ANALYTICS</p>
