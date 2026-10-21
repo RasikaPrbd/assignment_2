@@ -18,6 +18,7 @@ class Product extends Model
         'discount_type',
         'discount_value',
         'quantity',
+        'reorder_level',
         'is_active',
     ];
 
@@ -28,6 +29,7 @@ class Product extends Model
             'selling_price' => 'decimal:2',
             'discount_value' => 'decimal:2',
             'quantity' => 'integer',
+            'reorder_level' => 'integer',
             'is_active' => 'boolean',
         ];
     }
@@ -40,5 +42,10 @@ class Product extends Model
     public function supplier(): BelongsTo
     {
         return $this->belongsTo(Supplier::class);
+    }
+
+    public function isLowStock(): bool
+    {
+        return $this->quantity <= $this->reorder_level;
     }
 }

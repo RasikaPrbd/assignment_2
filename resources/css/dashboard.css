@@ -524,3 +524,52 @@
         padding: 18px;
     }
 }
+
+/* Customer create form and matching cards */
+.customer-create-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(280px, 1fr);
+    gap: 24px;
+    align-items: start;
+}
+
+.customer-create-layout .form-card {
+    min-width: 0;
+}
+
+.customer-matches {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 15px #00000010;
+}
+
+.customer-match-card {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    margin-top: 12px;
+    text-align: left;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.customer-match-card:hover {
+    border-color: #2563eb;
+    background: #eff6ff;
+}
+
+.customer-match-card p {
+    margin: 5px 0;
+    color: #64748b;
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 900px) {
+    .customer-create-layout {
+        grid-template-columns: 1fr;
+    }
+}

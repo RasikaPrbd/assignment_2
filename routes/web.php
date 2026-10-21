@@ -3,6 +3,8 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\productController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -27,4 +29,11 @@ Route::middleware('auth')->group(function () {
     Route::resource('categories', CategoryController::class);
 
     Route::resource('suppliers', SupplierController::class);
+
+    Route::get('/customers/find-matches', [CustomerController::class, 'findMatches'])
+        ->name('customers.findMatches');
+
+    Route::resource('customers', CustomerController::class);
+
+    Route::resource('products', ProductController::class);
 });

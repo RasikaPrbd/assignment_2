@@ -16,7 +16,8 @@
             Users
         </a>
 
-        <a href="#" class="nav-link">
+        <a href="{{ route('customers.index') }}"
+            class="nav-link {{ request()->routeIs('customers.*') ? 'active' : '' }}">
             Customers
         </a>
 
