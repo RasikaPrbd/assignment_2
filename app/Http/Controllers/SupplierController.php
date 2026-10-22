@@ -27,7 +27,7 @@ class SupplierController extends Controller
             'supplier_name' => ['required', 'string', 'max:255'],
             'company_name' => ['nullable', 'string', 'max:255'],
             'phone' => ['required', 'string', 'regex:/^(?:0|94|\+94)7[0-9]{8}$/', 'max:30'],
-            'email' => ['nullable', 'email', 'max:255'],
+            'email' => ['required', 'email', 'max:255'],
             'address' => ['nullable', 'string'],
             'is_active' => ['required', 'boolean'],
         ], [
@@ -57,7 +57,7 @@ class SupplierController extends Controller
             'supplier_name' => ['required', 'string', 'max:255'],
             'company_name' => ['nullable', 'string', 'max:255'],
             'phone' => ['required', 'string', 'regex:/^(?:0|94|\+94)7[0-9]{8}$/', 'max:30'],
-            'email' => ['nullable', 'email', 'max:255'],
+            'email' => ['required', 'email', 'max:255'],
             'address' => ['nullable', 'string'],
             'is_active' => ['required', 'boolean'],
 

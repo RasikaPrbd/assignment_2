@@ -40,7 +40,7 @@
 
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" value="{{ old('email') }}">
+                <input type="email" id="email" name="email" value="{{ old('email') }}" required>
                 @error('email')
                     <p class="field-error">{{ $message }}</p>
                 @enderror

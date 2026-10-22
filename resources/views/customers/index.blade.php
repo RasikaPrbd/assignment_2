@@ -9,9 +9,6 @@
             <p>Manage your customer records.</p>
         </div>
 
-        <a href="{{ route('customers.create') }}" class="primary-btn">
-            + Add Customer
-        </a>
     </div>
 
     @if (session('success'))

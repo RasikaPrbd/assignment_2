@@ -48,7 +48,11 @@
                 Purchases
             </a>
 
-            <a href="#" class="nav-link">Invoices</a>
+            <a href="{{ route('invoices.create') }}"
+                class="nav-link {{ request()->routeIs('invoices.*') ? 'active' : '' }}">
+                Invoices
+            </a>
+
             <a href="#" class="nav-link">Payments</a>
         </div>
 

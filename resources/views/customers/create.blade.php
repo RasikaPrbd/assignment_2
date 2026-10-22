@@ -12,9 +12,12 @@
 
     <div class="customer-create-layout">
         <div class="form-card">
-            <form action="{{ route('customers.store') }}" method="POST">
+            <form id="customer-form" action="{{ route('customers.store') }}" method="POST">
+                @if (request('return_to') === 'checkout')
+                    <input type="hidden" name="return_to" value="checkout">
+                @endif
                 @csrf
-
+                <input type="hidden" id="existing_customer_id" name="existing_customer_id">
                 <p class="form-hint">
                     Customer Code will be generated automatically.
                 </p>
@@ -83,6 +86,9 @@
         document.addEventListener('DOMContentLoaded', () => {
             const phoneInput = document.getElementById('phone');
             const emailInput = document.getElementById('email');
+            const customerForm = document.getElementById('customer-form');
+            const existingCustomerIdInput = document.getElementById('existing_customer_id');
+            const nameInput = document.getElementById('name');
             const results = document.getElementById('customer-match-results');
             const message = document.getElementById('match-message');
 
@@ -158,13 +164,20 @@
                         email.textContent = `Email: ${customer.email || 'Not provided'}`;
 
                         const action = document.createElement('p');
-                        action.textContent = 'Open existing customer →';
-
+                        action.textContent = 'Use this customer for invoice →';
                         card.append(code, name, phone, email, action);
 
                         card.addEventListener('click', () => {
-                            window.location.href =
-                                `/customers/${encodeURIComponent(customer.id)}/edit`;
+                            existingCustomerIdInput.value = customer.id;
+
+                            nameInput.value = customer.name || '';
+                            phoneInput.value = customer.phone || '';
+                            emailInput.value = customer.email || '';
+
+                            message.textContent =
+                                `Using existing customer: ${customer.name}. Continuing...`;
+
+                            customerForm.requestSubmit();
                         });
 
                         results.appendChild(card);
