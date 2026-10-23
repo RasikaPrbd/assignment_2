@@ -10,6 +10,8 @@ use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\StockReportController;
+use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -41,6 +43,9 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('products', ProductController::class);
 
+    Route::get('/stock-report', [StockReportController::class, 'index'])
+        ->name('stock-report.index');
+
     Route::resource('purchases', PurchaseController::class);
 
     Route::get('/payment-status', [InvoiceController::class, 'paymentStatus'])
@@ -52,4 +57,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('payments', PaymentController::class)
         ->only(['index', 'create', 'store', 'show']);
+
+    Route::get('/reports', [ReportController::class, 'index'])
+        ->name('reports.index');
 });

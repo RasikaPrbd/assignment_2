@@ -36,7 +36,10 @@
                 class="nav-link {{ request()->routeIs('suppliers.*') ? 'active' : '' }}">
                 Suppliers
             </a>
-            <a href="#" class="nav-link">Stock Report</a>
+            <a href="{{ route('stock-report.index') }}"
+                class="nav-link {{ request()->routeIs('stock-report.*') ? 'active' : '' }}">
+                Stock Report
+            </a>
         </div>
 
 
@@ -70,7 +73,10 @@
         <div class="nav-group">
             <p class="menu-heading">ANALYTICS</p>
 
-            <a href="#" class="nav-link">Reports</a>
+            <a href="{{ route('reports.index') }}"
+                class="nav-link {{ request()->routeIs('reports.*') ? 'active' : '' }}">
+                Reports
+            </a>
         </div>
 
     </nav>
