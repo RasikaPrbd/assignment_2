@@ -12,7 +12,7 @@
             Dashboard
         </a>
 
-        <a href="#" class="nav-link">
+        <a href="{{ route('users.index') }}" class="nav-link {{ request()->routeIs('users.*') ? 'active' : '' }}">
             Users
         </a>
 
@@ -40,6 +40,7 @@
         </div>
 
 
+
         <div class="nav-group">
             <p class="menu-heading">TRANSACTIONS</p>
 
@@ -48,13 +49,22 @@
                 Purchases
             </a>
 
-            <a href="{{ route('invoices.create') }}"
-                class="nav-link {{ request()->routeIs('invoices.*') ? 'active' : '' }}">
+            <a href="{{ route('invoices.index') }}"
+                class="nav-link {{ request()->routeIs('invoices.index', 'invoices.show', 'invoices.create') ? 'active' : '' }}">
                 Invoices
             </a>
 
-            <a href="#" class="nav-link">Payments</a>
+            <a href="{{ route('invoices.payment-status') }}"
+                class="nav-link {{ request()->routeIs('invoices.payment-status') ? 'active' : '' }}">
+                Payment Status
+            </a>
+
+            <a href="{{ route('payments.index') }}"
+                class="nav-link {{ request()->routeIs('payments.*') ? 'active' : '' }}">
+                Payment History
+            </a>
         </div>
+
 
 
         <div class="nav-group">

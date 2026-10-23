@@ -95,4 +95,41 @@ class InvoiceController extends Controller
     {
         abort(403, 'Deleting invoices is disabled to protect stock and payment records.');
     }
+
+
+    public function paymentStatus(Request $request)
+    {
+        $query = Invoice::with('customer', 'user')
+            ->latest();
+
+        if ($request->filled('search')) {
+            $search = $request->search;
+
+            $query->where(function ($q) use ($search) {
+                $q->where('invoice_number', 'like', "%{$search}%")
+                    ->orWhereHas('customer', function ($customerQuery) use ($search) {
+                        $customerQuery->where('name', 'like', "%{$search}%");
+                    });
+            });
+        }
+
+        if (in_array($request->status, ['paid', 'partially_paid', 'unpaid'], true)) {
+            $query->where('status', $request->status);
+        }
+
+        $invoices = $query->paginate(10)->withQueryString();
+
+        $totalInvoices = Invoice::count();
+        $paidInvoices = Invoice::where('status', 'paid')->count();
+        $partialInvoices = Invoice::where('status', 'partially_paid')->count();
+        $unpaidInvoices = Invoice::where('status', 'unpaid')->count();
+
+        return view('invoices.payment-status', compact(
+            'invoices',
+            'totalInvoices',
+            'paidInvoices',
+            'partialInvoices',
+            'unpaidInvoices'
+        ));
+    }
 }

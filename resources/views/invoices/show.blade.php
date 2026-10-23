@@ -1,211 +1,243 @@
  @extends('layouts.app')
 
-@section('title', 'Invoice Details')
+ @section('title', 'Invoice Details')
 
-@section('content')
-    <div class="page-heading">
-        <div>
-            <h1>Invoice Details</h1>
-            <p>View sale, payment and outstanding balance.</p>
-        </div>
+ @section('content')
+     <div class="page-heading">
+         <div>
+             <h1>Invoice Details</h1>
+             <p>View sale, payment and outstanding balance.</p>
+         </div>
 
-        <div class="form-actions no-print">
-            <button type="button" onclick="window.print()" class="primary-btn">
-                Print Bill
-            </button>
+         <div class="form-actions no-print">
+             <button type="button" onclick="window.print()" class="primary-btn">
+                 Print Bill
+             </button>
 
-            <a href="{{ route('invoices.create') }}" class="secondary-btn">
-                New Sale
-            </a>
-        </div>
-    </div>
+             <a href="{{ route('invoices.create') }}" class="secondary-btn">
+                 New Sale
+             </a>
+         </div>
+     </div>
 
-    @if (session('success'))
-        <div class="alert-success no-print">
-            {{ session('success') }}
-        </div>
-    @endif
+     @if (session('success'))
+         <div class="alert-success no-print">
+             {{ session('success') }}
+         </div>
+     @endif
 
-    <div class="form-card invoice-paper">
-        <div class="invoice-header">
-            <div>
-                <h1>SALES INVOICE</h1>
-                <p>Invoice No: <strong>{{ $invoice->invoice_number }}</strong></p>
-                <p>Date: {{ $invoice->invoice_date->format('Y-m-d') }}</p>
-                @if ($invoice->due_date)
-                    <p>Due Date: {{ $invoice->due_date->format('Y-m-d') }}</p>
-                @endif
-            </div>
+     <div class="form-card invoice-paper">
+         <div class="invoice-header">
+             <div>
+                 <h1>SALES INVOICE</h1>
+                 <p>Invoice No: <strong>{{ $invoice->invoice_number }}</strong></p>
+                 <p>Date: {{ $invoice->invoice_date->format('Y-m-d') }}</p>
+                 @if ($invoice->due_date)
+                     <p>Due Date: {{ $invoice->due_date->format('Y-m-d') }}</p>
+                 @endif
+             </div>
 
-            <div>
-                <h2>Customer</h2>
-                <p>{{ $invoice->customer->name }}</p>
-                <p>{{ $invoice->customer->phone }}</p>
-                @if ($invoice->customer->email)
-                    <p>{{ $invoice->customer->email }}</p>
-                @endif
-                @if ($invoice->customer->address)
-                    <p>{{ $invoice->customer->address }}</p>
-                @endif
-            </div>
-        </div>
+             <div>
+                 <h2>Customer</h2>
+                 <p>{{ $invoice->customer->name }}</p>
+                 <p>{{ $invoice->customer->phone }}</p>
+                 @if ($invoice->customer->email)
+                     <p>{{ $invoice->customer->email }}</p>
+                 @endif
+                 @if ($invoice->customer->address)
+                     <p>{{ $invoice->customer->address }}</p>
+                 @endif
+             </div>
+         </div>
 
-        <div class="table-card">
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>Product</th>
-                        <th>Unit Price</th>
-                        <th>Quantity</th>
-                        <th>Line Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($invoice->items as $item)
-                        <tr>
-                            <td>{{ $item->product->name }}</td>
-                            <td>Rs. {{ number_format($item->unit_price, 2) }}</td>
-                            <td>{{ $item->quantity }}</td>
-                            <td>Rs. {{ number_format($item->line_total, 2) }}</td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
+         <div class="table-card">
+             <table class="data-table">
+                 <thead>
+                     <tr>
+                         <th>Product</th>
+                         <th>Unit Price</th>
+                         <th>Quantity</th>
+                         <th>Line Total</th>
+                     </tr>
+                 </thead>
+                 <tbody>
+                     @foreach ($invoice->items as $item)
+                         <tr>
+                             <td>{{ $item->product->name }}</td>
+                             <td>Rs. {{ number_format($item->unit_price, 2) }}</td>
+                             <td>{{ $item->quantity }}</td>
+                             <td>Rs. {{ number_format($item->line_total, 2) }}</td>
+                         </tr>
+                     @endforeach
+                 </tbody>
+             </table>
+         </div>
 
-        <div class="invoice-totals">
-            <p>
-                Subtotal:
-                <strong>Rs. {{ number_format($invoice->subtotal, 2) }}</strong>
-            </p>
+         <div class="invoice-totals">
+             <p>
+                 Subtotal:
+                 <strong>Rs. {{ number_format($invoice->subtotal, 2) }}</strong>
+             </p>
 
-            <p>
-                Discount:
-                <strong>Rs. {{ number_format($invoice->discount_amount, 2) }}</strong>
-            </p>
+             <p>
+                 Discount:
+                 <strong>Rs. {{ number_format($invoice->discount_amount, 2) }}</strong>
+             </p>
 
-            <p>
-                Tax ({{ number_format($invoice->tax_rate, 2) }}%):
-                <strong>Rs. {{ number_format($invoice->tax_amount, 2) }}</strong>
-            </p>
+             <p>
+                 Tax ({{ number_format($invoice->tax_rate, 2) }}%):
+                 <strong>Rs. {{ number_format($invoice->tax_amount, 2) }}</strong>
+             </p>
 
-            <h2>
-                Grand Total:
-                Rs. {{ number_format($invoice->total_amount, 2) }}
-            </h2>
+             <h2>
+                 Grand Total:
+                 Rs. {{ number_format($invoice->total_amount, 2) }}
+             </h2>
 
-            <p>
-                Paid Amount:
-                <strong>Rs. {{ number_format($invoice->paid_amount, 2) }}</strong>
-            </p>
+             <p>
+                 Paid Amount:
+                 <strong>Rs. {{ number_format($invoice->paid_amount, 2) }}</strong>
+             </p>
 
-            <h3>
-                Outstanding Balance:
-                Rs. {{ number_format($invoice->balance_amount, 2) }}
-            </h3>
+             <h3>
+                 Outstanding Balance:
+                 Rs. {{ number_format($invoice->balance_amount, 2) }}
+             </h3>
 
-            <p>
-                Payment Status:
-                <strong>{{ ucfirst(str_replace('_', ' ', $invoice->status)) }}</strong>
-            </p>
-        </div>
+             <p>
+                 Payment Status:
+                 <strong>{{ ucfirst(str_replace('_', ' ', $invoice->status)) }}</strong>
+             </p>
+         </div>
 
-        @if ($invoice->payments->isNotEmpty())
-            <h3>Payment Details</h3>
 
-            <div class="table-card">
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>Payment No.</th>
-                            <th>Date</th>
-                            <th>Method</th>
-                            <th>Amount</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($invoice->payments as $payment)
-                            <tr>
-                                <td>{{ $payment->payment_number }}</td>
-                                <td>{{ $payment->payment_date->format('Y-m-d') }}</td>
-                                <td>{{ ucfirst(str_replace('_', ' ', $payment->payment_method)) }}</td>
-                                <td>Rs. {{ number_format($payment->amount, 2) }}</td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        @endif
+         @if ($invoice->payments->isNotEmpty())
+             <h3>Payment History</h3>
 
-        @if ($invoice->notes)
-            <div class="invoice-notes">
-                <strong>Notes:</strong>
-                <p>{{ $invoice->notes }}</p>
-            </div>
-        @endif
+             <div class="table-card">
+                 <div class="table-responsive">
+                     <table class="data-table">
+                         <thead>
+                             <tr>
+                                 <th>Payment No.</th>
+                                 <th>Date</th>
+                                 <th>Method</th>
+                                 <th>Reference</th>
+                                 <th>Amount</th>
+                             </tr>
+                         </thead>
 
-        <div class="invoice-footer">
-            <p>Thank you for your business!</p>
-        </div>
-    </div>
+                         <tbody>
+                             @foreach ($invoice->payments as $payment)
+                                 <tr>
+                                     <td>
+                                         <a href="{{ route('payments.show', $payment) }}">
+                                             {{ $payment->payment_number }}
+                                         </a>
+                                     </td>
 
-    <style>
-        .invoice-header {
-            display: flex;
-            justify-content: space-between;
-            gap: 24px;
-            flex-wrap: wrap;
-            margin-bottom: 28px;
-        }
+                                     <td>
+                                         {{ $payment->payment_date?->format('Y-m-d') ?? 'N/A' }}
+                                     </td>
 
-        .invoice-totals {
-            max-width: 420px;
-            margin: 24px 0 24px auto;
-            text-align: right;
-        }
+                                     <td>
+                                         {{ ucwords(str_replace('_', ' ', $payment->payment_method)) }}
+                                     </td>
 
-        .invoice-totals p {
-            margin: 10px 0;
-        }
+                                     <td>{{ $payment->reference ?: 'N/A' }}</td>
 
-        .invoice-footer {
-            margin-top: 40px;
-            text-align: center;
-            border-top: 1px solid #ddd;
-            padding-top: 16px;
-        }
+                                     <td>
+                                         Rs. {{ number_format((float) $payment->amount, 2) }}
+                                     </td>
+                                 </tr>
+                             @endforeach
+                         </tbody>
 
-        @media print {
-            body {
-                background: #fff !important;
-            }
+                         <tfoot>
+                             <tr>
+                                 <th colspan="4" style="text-align: right;">
+                                     Total Payments
+                                 </th>
+                                 <th>
+                                     Rs. {{ number_format((float) $invoice->payments->sum('amount'), 2) }}
+                                 </th>
+                             </tr>
+                         </tfoot>
+                     </table>
+                 </div>
+             </div>
+         @endif
 
-            .no-print,
-            aside,
-            nav,
-            header {
-                display: none !important;
-            }
 
-            .invoice-paper {
-                border: none !important;
-                box-shadow: none !important;
-                width: 100% !important;
-                max-width: none !important;
-                margin: 0 !important;
-                padding: 0 !important;
-            }
+         @if ($invoice->notes)
+             <div class="invoice-notes">
+                 <strong>Notes:</strong>
+                 <p>{{ $invoice->notes }}</p>
+             </div>
+         @endif
 
-            .data-table {
-                width: 100%;
-                border-collapse: collapse;
-            }
+         <div class="invoice-footer">
+             <p>Thank you for your business!</p>
+         </div>
+     </div>
 
-            .data-table th,
-            .data-table td {
-                border: 1px solid #ddd;
-                padding: 8px;
-            }
-        }
-    </style>
-@endsection
+     <style>
+         .invoice-header {
+             display: flex;
+             justify-content: space-between;
+             gap: 24px;
+             flex-wrap: wrap;
+             margin-bottom: 28px;
+         }
+
+         .invoice-totals {
+             max-width: 420px;
+             margin: 24px 0 24px auto;
+             text-align: right;
+         }
+
+         .invoice-totals p {
+             margin: 10px 0;
+         }
+
+         .invoice-footer {
+             margin-top: 40px;
+             text-align: center;
+             border-top: 1px solid #ddd;
+             padding-top: 16px;
+         }
+
+         @media print {
+             body {
+                 background: #fff !important;
+             }
+
+             .no-print,
+             aside,
+             nav,
+             header {
+                 display: none !important;
+             }
+
+             .invoice-paper {
+                 border: none !important;
+                 box-shadow: none !important;
+                 width: 100% !important;
+                 max-width: none !important;
+                 margin: 0 !important;
+                 padding: 0 !important;
+             }
+
+             .data-table {
+                 width: 100%;
+                 border-collapse: collapse;
+             }
+
+             .data-table th,
+             .data-table td {
+                 border: 1px solid #ddd;
+                 padding: 8px;
+             }
+         }
+     </style>
+ @endsection

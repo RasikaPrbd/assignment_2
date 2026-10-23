@@ -1,1 +1,1 @@
-//
+import "../css/dashboard.css";
