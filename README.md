@@ -32,13 +32,17 @@ A web-based application developed using Laravel to manage users, customers, prod
 
 ### 1. Clone the Repository
 
+```bash
 git clone <repository-url>
 cd assignment2
+```
 
 ### 2. Install Dependencies
 
+```bash
 composer install
 npm install
+```
 
 ### 3. Configure Environment
 
@@ -60,11 +64,13 @@ php artisan migrate
 
 ```bash
 php artisan serve
-
+```
 
 If frontend assets need to be compiled, run this in another terminal:
 
+```bash
 npm run dev
+```
 
 Open the application at:
 
@@ -76,4 +82,3 @@ http://127.0.0.1:8000
 - Role-based authorization for Admin, Sales User, and Inventory User.
 - Login rate limiting to temporarily block repeated failed login attempts.
 - Passwords are securely hashed by Laravel.
-```
