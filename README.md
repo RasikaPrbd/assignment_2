@@ -90,6 +90,22 @@ Open the application in your browser:
 
 http://127.0.0.1:8000
 
+## Sample Login Credentials
+
+Use the sample accounts created by the project's seeders, if available.
+
+| Role  | Email         | Password    |
+| ----- | ------------- | ----------- |
+| Admin | admin@123.com | Admin@12345 |
+
+## Database ER Diagram
+
+docs\sales_inventory_er_diagram.png
+
+## Application Screenshots
+
+`docs/screenshots/`.
+
 ## Security
 
 - Secure user authentication.
