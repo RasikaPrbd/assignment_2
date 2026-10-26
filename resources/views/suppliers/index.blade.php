@@ -65,7 +65,7 @@
                             </td>
 
                             <td>
-                                <div class="action-buttons">
+                                <div class="button-actions">
                                     <a href="{{ route('suppliers.edit', $supplier) }}" class="edit-btn">
                                         Edit
                                     </a>

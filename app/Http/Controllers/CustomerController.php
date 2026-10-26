@@ -99,11 +99,13 @@ class CustomerController extends Controller
         $validated = $request->validate([
             'existing_customer_id' => ['nullable', 'integer', 'exists:customers,id'],
             'name' => ['required', 'string', 'max:255'],
-            'phone' => ['required', 'string', 'max:30'],
+            'phone' => ['required', 'string', 'max:15', 'regex:/^\+?[0-9]+$/',],
             'email' => ['nullable', 'email', 'max:255'],
             'address' => ['nullable', 'string'],
             'is_active' => ['required', 'boolean'],
             'return_to' => ['nullable', 'in:checkout'],
+        ], [
+            'phone.regex' => 'The phone number may contain only digits (0-9) and an optional + at the beginning.',
         ]);
 
         $returnTo = $validated['return_to'] ?? null;
@@ -299,10 +301,12 @@ class CustomerController extends Controller
         $validated = $request->validate([
 
             'name' => ['required', 'string', 'max:255'],
-            'phone' => ['required', 'string', 'max:30'],
+            'phone' => ['required', 'string', 'max:15', 'regex:/^\+?[0-9]+$/',],
             'email' => ['nullable', 'email', 'max:255'],
             'address' => ['nullable', 'string'],
             'is_active' => ['required', 'boolean'],
+        ], [
+            'phone.regex' => 'The phone number may contain only digits (0-9) and an optional + at the beginning.',
         ]);
 
         $customer->update($validated);

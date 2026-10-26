@@ -19,11 +19,13 @@ class UserController extends Controller
         );
     }
 
+
     public function index(Request $request)
     {
         $this->ensureAdmin();
 
         $search = trim((string) $request->query('search', ''));
+        $roleId = $request->query('role_id');
 
         $users = User::with('role')
             ->when($search !== '', function ($query) use ($search) {
@@ -32,12 +34,23 @@ class UserController extends Controller
                         ->orWhere('email', 'like', "%{$search}%");
                 });
             })
+            ->when($roleId !== '' && $roleId !== null, function ($query) use ($roleId) {
+                $query->where('role_id', $roleId);
+            })
             ->orderBy('name')
             ->paginate(10)
             ->withQueryString();
 
-        return view('users.index', compact('users', 'search'));
+        $roles = \App\Models\Role::orderBy('name')->get();
+
+        return view('users.index', compact(
+            'users',
+            'search',
+            'roles',
+            'roleId'
+        ));
     }
+
 
     public function create()
     {

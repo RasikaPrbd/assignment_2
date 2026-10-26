@@ -33,7 +33,7 @@ A web-based application developed using Laravel to manage users, customers, prod
 ### 1. Clone the Repository
 
 ```bash
-git clone <repository-url>
+git clone <https://github.com/RasikaPrbd/assignment_2>
 cd assignment2
 ```
 

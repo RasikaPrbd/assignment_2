@@ -2716,3 +2716,312 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
+
+/* User Management UI improvements */
+
+.user-management-page .user-search-card {
+    width: 100%;
+    max-width: none;
+    margin-bottom: 20px;
+}
+
+.user-management-page .user-search-form {
+    display: flex;
+    align-items: end;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.user-management-page .user-search-field {
+    flex: 1;
+    min-width: 240px;
+}
+
+.user-management-page .user-search-field input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.user-management-page .user-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.user-management-page .user-actions .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 38px;
+    padding: 8px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    background: #fff;
+    color: #334155;
+    font: inherit;
+    font-size: 14px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.user-management-page .user-actions .btn:hover {
+    background: #f1f5f9;
+}
+
+.user-management-page .user-actions .btn-delete {
+    border-color: #fecaca;
+    background: #fff;
+    color: #dc2626;
+}
+
+.user-management-page .user-actions .btn-delete:hover {
+    background: #fef2f2;
+}
+
+.user-management-page .user-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.user-management-page .user-table th,
+.user-management-page .user-table td {
+    padding: 16px 18px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+    vertical-align: middle;
+}
+
+.user-management-page .user-table th {
+    background: #f8fafc;
+    color: #334155;
+    font-weight: 600;
+}
+
+.user-management-page .user-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.user-management-page .user-table tbody tr:hover {
+    background: #f8fafc;
+}
+
+@media (max-width: 768px) {
+    .user-management-page .user-search-form {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .user-management-page .user-search-field {
+        min-width: 0;
+    }
+
+    .user-management-page .user-table-wrap {
+        overflow-x: auto;
+    }
+
+    .user-management-page .user-table {
+        min-width: 750px;
+    }
+}
+
+/* User Management page */
+
+.user-management-page {
+    width: 100%;
+    min-width: 0;
+}
+
+.user-management-page .user-search-card {
+    width: 100%;
+    max-width: none;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+.user-management-page .user-search-form {
+    display: flex;
+    align-items: end;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.user-management-page .user-search-field {
+    flex: 1;
+    min-width: 240px;
+}
+
+.user-management-page .user-search-field input {
+    width: 100%;
+    min-height: 42px;
+    box-sizing: border-box;
+}
+
+.user-management-page .user-table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    box-sizing: border-box;
+}
+
+.user-management-page .user-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.user-management-page .user-table th,
+.user-management-page .user-table td {
+    padding: 16px 18px;
+    text-align: left;
+    vertical-align: middle;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.user-management-page .user-table th {
+    background: #f8fafc;
+    color: #334155;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.user-management-page .user-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.user-management-page .user-table tbody tr:hover {
+    background: #f8fafc;
+}
+
+.user-management-page .user-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.user-management-page .user-actions form {
+    margin: 0;
+}
+
+.user-management-page .user-actions .secondary-btn,
+.user-management-page .user-actions .danger-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 38px;
+    padding: 8px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    background: #fff;
+    color: #334155;
+    font-family: inherit;
+    font-size: 14px;
+    text-decoration: none;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.user-management-page .user-actions .secondary-btn:hover {
+    background: #f1f5f9;
+}
+
+.user-management-page .user-actions .danger-btn {
+    border-color: #fecaca;
+    background: #fff;
+    color: #dc2626;
+}
+
+.user-management-page .user-actions .danger-btn:hover {
+    background: #fef2f2;
+}
+
+.user-management-page .user-empty-state {
+    padding: 32px 16px;
+    text-align: center;
+    color: #64748b;
+}
+
+@media (max-width: 768px) {
+    .user-management-page .user-search-form {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .user-management-page .user-search-field {
+        min-width: 0;
+        width: 100%;
+    }
+
+    .user-management-page .user-search-form > button,
+    .user-management-page .user-search-form > a {
+        align-self: flex-start;
+    }
+
+    .user-management-page .user-table {
+        min-width: 750px;
+    }
+}
+
+.user-management-page .user-search-field select {
+    width: 100%;
+    min-height: 42px;
+    padding: 8px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    background: #fff;
+    color: #334155;
+    font: inherit;
+    box-sizing: border-box;
+}
+
+.user-management-page .user-search-form .user-search-field:first-child {
+    flex: 2;
+}
+
+.user-management-page .user-search-form .user-search-field:nth-child(2) {
+    flex: 1;
+}
+
+/* table action buttons */
+
+.button-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.button-actions form {
+    margin: 0;
+}
+
+.button-actions .secondary-btn,
+.button-actions .danger-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 38px;
+    padding: 8px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    background: #fff;
+    color: #334155;
+    font-family: inherit;
+    font-size: 14px;
+    text-decoration: none;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.button-actions .secondary-btn:hover {
+    background: #f1f5f9;
+}
+
+.button-actions .danger-btn {
+    border-color: #fecaca;
+    color: #dc2626;
+}
+
+.button-actions .danger-btn:hover {
+    background: #fef2f2;
+}

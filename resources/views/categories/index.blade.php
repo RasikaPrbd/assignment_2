@@ -71,7 +71,7 @@
                             </td>
                             <td>{{ $category->created_at->format('Y-m-d') }}</td>
                             <td>
-                                <div class="action-buttons">
+                                <div class="button-actions">
                                     <a href="{{ route('categories.edit', $category) }}" class="edit-btn">
                                         Edit
                                     </a>

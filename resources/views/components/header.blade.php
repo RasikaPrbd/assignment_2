@@ -11,9 +11,9 @@
             <span class="user-name">
                 {{ auth()->user()->name }}
             </span>
-
+            <b>:</b>
             <span class="user-role">
-                Administrator
+                {{ auth()->user()->role?->name }}
             </span>
         </div>
 

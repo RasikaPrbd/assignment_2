@@ -59,8 +59,15 @@
                 <label for="remember">Remember me</label>
             </div>
 
-            <button type="submit" class="btn-primary">
-                Sign In
+            <button type="submit" class="btn-primary" id="login-button"
+                @if (session('lock_seconds')) disabled @endif>
+                <span id="login-button-text">
+                    @if (session('lock_seconds'))
+                        Wait {{ session('lock_seconds') }} seconds
+                    @else
+                        Sign In
+                    @endif
+                </span>
             </button>
 
             @if ($errors->has('email') && !$errors->has('password') && !$errors->has('email'))
@@ -84,6 +91,38 @@
 
     </main>
 
+
+    @if (session('lock_seconds'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                let seconds = {{ (int) session('lock_seconds') }};
+                const button = document.getElementById('login-button');
+                const buttonText = document.getElementById('login-button-text');
+
+                if (!button || !buttonText || seconds <= 0) {
+                    return;
+                }
+
+                button.disabled = true;
+
+                function updateCountdown() {
+                    buttonText.textContent = `Wait ${seconds} seconds`;
+
+                    if (seconds <= 0) {
+                        button.disabled = false;
+                        buttonText.textContent = 'Sign In';
+                        return;
+                    }
+
+                    seconds--;
+                    setTimeout(updateCountdown, 1000);
+                }
+
+                updateCountdown();
+            });
+        </script>
+    @endif
 </body>
 
 </html>
+

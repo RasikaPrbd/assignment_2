@@ -52,7 +52,7 @@
                             </td>
 
                             <td>
-                                <div class="action-buttons">
+                                <div class="button-actions">
                                     <a href="{{ route('customers.edit', $customer) }}" class="secondary-btn">
                                         Edit
                                     </a>

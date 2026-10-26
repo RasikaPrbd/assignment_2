@@ -61,7 +61,7 @@
                                 @endif
                             </td>
                             <td>
-                                <div class="action-buttons">
+                                <div class="button-actions">
                                     <a href="{{ route('products.edit', $product) }}" class="secondary-btn">Edit</a>
 
                                     <form action="{{ route('products.destroy', $product) }}" method="POST"
