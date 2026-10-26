@@ -6,12 +6,15 @@ A web-based application developed using Laravel to manage users, customers, prod
 
 - User Management
 - Customer Management
-- Product Management
+- Product and Category Management
 - Supplier Management
 - Purchase Management
 - Invoice Management
 - Payment Management
-- Business Reports and Stock Reports
+- Stock Reports
+- Business Reports with Date Filters
+- Role-Based Access Control
+- Login Security with Rate Limiting
 
 ## User Roles
 
@@ -27,14 +30,15 @@ A web-based application developed using Laravel to manage users, customers, prod
 - Blade
 - HTML and CSS
 - JavaScript
+- Node.js and NPM
 
-## Installation & Setup
+## Installation and Setup
 
 ### 1. Clone the Repository
 
 ```bash
-git clone <https://github.com/RasikaPrbd/assignment_2>
-cd assignment2
+git clone https://github.com/RasikaPrbd/assignment_2.git
+cd assignment_2
 ```
 
 ### 2. Install Dependencies
@@ -44,41 +48,53 @@ composer install
 npm install
 ```
 
-### 3. Configure Environment
+### 3. Configure the Environment
 
-Copy `.env.example` to `.env` and configure your database connection.
+Copy `.env.example` to `.env` and update the database settings.
+
+Create a MySQL database named `sales_inventory`, or use another database name and update `.env` accordingly.
+
+Generate the application key:
 
 ```bash
 php artisan key:generate
 ```
 
-### 4. Run Database Migrations
+### 4. Run Database Migrations and Seeders
 
-Create the database in MySQL, then run:
+Run the database migrations:
 
 ```bash
 php artisan migrate
 ```
 
-### 5. Start the Application
+If the project has seeders configured to create the required roles or sample data, run:
+
+```bash
+php artisan db:seed
+```
+
+### 5. Build Frontend Assets
+
+```bash
+npm run build
+```
+
+### 6. Start the Application
 
 ```bash
 php artisan serve
 ```
 
-If frontend assets need to be compiled, run this in another terminal:
-
-```bash
-npm run dev
-```
-
-Open the application at:
+Open the application in your browser:
 
 http://127.0.0.1:8000
 
-## Login & Security
+## Security
 
 - Secure user authentication.
-- Role-based authorization for Admin, Sales User, and Inventory User.
-- Login rate limiting to temporarily block repeated failed login attempts.
-- Passwords are securely hashed by Laravel.
+- Password hashing using Laravel.
+- Role-based authorization.
+- Validation of user input.
+- Login rate limiting to reduce repeated failed login attempts.
+- Inactive user accounts are prevented from logging in.
