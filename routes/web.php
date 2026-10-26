@@ -50,6 +50,11 @@ Route::middleware('auth')->group(function () {
             'findMatches'
         ])->name('customers.findMatches');
 
+        Route::get('/customers/quick-create', [
+            CustomerController::class,
+            'quickCreate'
+        ])->name('customers.quickCreate');
+
         Route::resource('customers', CustomerController::class);
 
         Route::get('/payment-status', [

@@ -24,6 +24,11 @@ class CustomerController extends Controller
         return view('customers.index', compact('customers'));
     }
 
+    public function quickCreate()
+    {
+        return view('customers.quick-create');
+    }
+
     public function create(Request $request)
     {
         if (
@@ -114,13 +119,28 @@ class CustomerController extends Controller
         unset($validated['return_to']);
         unset($validated['existing_customer_id']);
 
-        if (
-            $returnTo !== 'checkout' ||
-            !session()->has('sale_draft')
-        ) {
+        // Save a customer from the Customers page.
+        if ($returnTo !== 'checkout') {
+            $customerCode = null;
+
+            do {
+                $customerCode = 'CUS-' . Str::upper(Str::random(8));
+            } while (Customer::where('customer_code', $customerCode)->exists());
+
+            $validated['customer_code'] = $customerCode;
+
+            Customer::create($validated);
+
             return redirect()
                 ->route('customers.index')
-                ->with('error', 'Customers can only be added during invoice creation.');
+                ->with('success', 'Customer created successfully.');
+        }
+
+        // Continue the existing invoice checkout workflow.
+        if (!session()->has('sale_draft')) {
+            return redirect()
+                ->route('customers.index')
+                ->with('error', 'Your sale session has expired. Please create the invoice again.');
         }
 
         // The sale draft must exist before completing checkout.

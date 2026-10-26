@@ -3,12 +3,16 @@
 @section('title', 'Customers')
 
 @section('content')
+
     <div class="page-heading">
         <div>
             <h1>Customers</h1>
             <p>Manage your customer records.</p>
         </div>
 
+        <a href="{{ route('customers.quickCreate') }}" class="primary-btn add-customer-btn">
+            + Add Customer
+        </a>
     </div>
 
     @if (session('success'))
